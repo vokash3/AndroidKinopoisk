@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 import lombok.Data;
-import lombok.Getter;
 import ru.nitestalker.androidkinopoisk.model.docs.Movie;
 
 @Data

@@ -17,12 +17,15 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Setter;
 import ru.nitestalker.androidkinopoisk.R;
 import ru.nitestalker.androidkinopoisk.model.docs.Movie;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder> {
 
     private List<Movie> movieList = new ArrayList<>();
+    @Setter
+    private OnReachEndListener onReachEndListener;
 
     @SuppressLint("NotifyDataSetChanged")
     public void setMovieList(List<Movie> movieList) {
@@ -39,7 +42,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
 
     @Override
     public void onBindViewHolder(@NonNull MoviesViewHolder holder, int position) { // Вызывается для каждого элемента списка, который нужно отобразить
-
         Movie movie = movieList.get(position);
         // Устанавливаем постер
         Glide.with(holder.itemView)
@@ -55,6 +57,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
         else background = R.drawable.circle_red;
         Drawable bg = ContextCompat.getDrawable(holder.itemView.getContext(), background);
         holder.textViewRating.setBackground(bg);
+
+        if(position == movieList.size() - 1 && onReachEndListener != null)
+            onReachEndListener.onReachEnd();
     }
 
     @Override
@@ -72,6 +77,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
             imageViewPoster = itemView.findViewById(R.id.imageViewPoster);
             textViewRating = itemView.findViewById(R.id.textViewRating);
         }
+    }
+
+    public interface OnReachEndListener { // Callback достижения конца списка на экране
+
+        void onReachEnd();
+
     }
 
 
