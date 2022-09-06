@@ -1,16 +1,46 @@
 package ru.nitestalker.androidkinopoisk;
 
+import android.annotation.SuppressLint;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MoviesAdapter {
+import java.util.ArrayList;
+import java.util.List;
 
+import ru.nitestalker.androidkinopoisk.model.docs.Movie;
 
+public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>{
 
+    private List<Movie> movieList = new ArrayList<>();
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void setMovieList(List<Movie> movieList) {
+        this.movieList = movieList;
+        notifyDataSetChanged(); // НЕ ЗАБЫВАТЬ
+    }
+
+    @NonNull
+    @Override
+    public MoviesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) { // Создаём View из макета и возвращаем ViewHolder
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
+        return new MoviesViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MoviesViewHolder holder, int position) {
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return movieList.size();
+    }
 
     static class MoviesViewHolder extends RecyclerView.ViewHolder {
 
