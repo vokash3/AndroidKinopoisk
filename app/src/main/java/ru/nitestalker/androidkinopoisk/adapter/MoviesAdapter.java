@@ -1,6 +1,7 @@
 package ru.nitestalker.androidkinopoisk.adapter;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -18,7 +20,7 @@ import java.util.List;
 import ru.nitestalker.androidkinopoisk.R;
 import ru.nitestalker.androidkinopoisk.model.docs.Movie;
 
-public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>{
+public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder> {
 
     private List<Movie> movieList = new ArrayList<>();
 
@@ -44,9 +46,15 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
                 .load(movie.getPoster().getUrl())
                 .into(holder.imageViewPoster);
         // Устанавливаем рейтинг
-        holder.textViewRating.setText(movie.getRating().getKp());
-
-
+        Double rating = movie.getRating().getKp();
+        holder.textViewRating.setText(String.valueOf(rating));
+        // и соответсвующий фон
+        int background = 0;
+        if (rating >= 7) background = R.drawable.circle_green;
+        else if (rating >= 5) background = R.drawable.circle_yellow;
+        else background = R.drawable.circle_red;
+        Drawable bg = ContextCompat.getDrawable(holder.itemView.getContext(), background);
+        holder.textViewRating.setBackground(bg);
     }
 
     @Override

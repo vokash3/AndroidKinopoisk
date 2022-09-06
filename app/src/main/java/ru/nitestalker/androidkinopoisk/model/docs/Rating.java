@@ -8,6 +8,6 @@ import lombok.Data;
 public class Rating {
 
     @SerializedName("kp")
-    private String kp;
+    private Double kp;
 
 }
