@@ -32,7 +32,11 @@ public class MainViewModel extends AndroidViewModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movieResponse -> {
-                            movies.setValue(movieResponse.getMovies());
+                            List<Movie> loadedMovies = movies.getValue();
+                            if(loadedMovies != null) {
+                                loadedMovies.addAll(movieResponse.getMovies());
+                                movies.setValue(loadedMovies);
+                            } else movies.setValue(movieResponse.getMovies());
                             page++;
                         },
                         throwable -> Log.e(TAG, throwable.toString()));

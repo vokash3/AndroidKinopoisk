@@ -2,6 +2,7 @@ package ru.nitestalker.androidkinopoisk.adapter;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import ru.nitestalker.androidkinopoisk.model.docs.Movie;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder> {
 
+    private final String TAG = "MoviesAdapter";
+
     private List<Movie> movieList = new ArrayList<>();
     @Setter
     private OnReachEndListener onReachEndListener;
@@ -42,6 +45,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
 
     @Override
     public void onBindViewHolder(@NonNull MoviesViewHolder holder, int position) { // Вызывается для каждого элемента списка, который нужно отобразить
+        Log.d(TAG, "onBindViewHolder: position = " + position);
         Movie movie = movieList.get(position);
         // Устанавливаем постер
         Glide.with(holder.itemView)
@@ -58,8 +62,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
         Drawable bg = ContextCompat.getDrawable(holder.itemView.getContext(), background);
         holder.textViewRating.setBackground(bg);
 
-        if(position == movieList.size() - 1 && onReachEndListener != null)
-            onReachEndListener.onReachEnd();
+        // Если "рисующийся" элемент находится почти в конце, то вызываем дальнейшую прогрузку элементов
+        if(position == movieList.size() - 5 && onReachEndListener != null)
+            onReachEndListener.onReachEnd(); // Логика в MainActivity.onCreate() анонимно
     }
 
     @Override
