@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 moviesAdapter.setMovieList(movies);
             }
         });
-        viewModel.loadMovies();
+//        viewModel.loadMovies(); // перенесено в конструктор ViewModel
         // Активируем progressBar
         viewModel.getIsLoading().observe(this, new Observer<Boolean>() {
             @Override

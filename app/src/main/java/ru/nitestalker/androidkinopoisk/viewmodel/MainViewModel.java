@@ -31,13 +31,14 @@ public class MainViewModel extends AndroidViewModel {
 
     public MainViewModel(@NonNull Application application) {
         super(application);
+        loadMovies();
     }
 
     public void loadMovies() {
-        Log.d(TAG, "loadMovies() page is " + page);
         Boolean loading = isLoading.getValue();
         // Прекратить запуск очередной загрузки, если она уже запущена ранее
         if (loading != null && loading) return;
+        Log.d(TAG, "loadMovies() page is " + page);
         Disposable disposable = ApiFactory.apiService.loadMovies(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
