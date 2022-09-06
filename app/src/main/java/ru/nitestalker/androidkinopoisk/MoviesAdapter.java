@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +35,16 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MoviesViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MoviesViewHolder holder, int position) { // Вызывается для каждого элемента списка, который нужно отобразить
+
+        Movie movie = movieList.get(position);
+        // Устанавливаем постер
+        Glide.with(holder.itemView)
+                .load(movie.getPoster().getUrl())
+                .into(holder.imageViewPoster);
+        // Устанавливаем рейтинг
+        holder.textViewRating.setText(movie.getRating().getKp());
+
 
     }
 

@@ -3,6 +3,8 @@ package ru.nitestalker.androidkinopoisk.model.docs;
 import com.google.gson.annotations.SerializedName;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 public class Movie {
