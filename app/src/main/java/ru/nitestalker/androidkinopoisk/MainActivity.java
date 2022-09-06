@@ -2,6 +2,8 @@ package ru.nitestalker.androidkinopoisk;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -23,11 +25,13 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewMovies;
     private MoviesAdapter moviesAdapter;
+    private ProgressBar progressBarLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        progressBarLoading = findViewById(R.id.progressBarLoading);
         // Установка адаптера в Recycler
         recyclerViewMovies = findViewById(R.id.recyclerViewMovies);
         moviesAdapter = new MoviesAdapter();
@@ -43,6 +47,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         viewModel.loadMovies();
+        // Активируем progressBar
+        viewModel.getIsLoading().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean loading) {
+                if (loading)
+                    progressBarLoading.setVisibility(View.VISIBLE);
+                else progressBarLoading.setVisibility(View.GONE);
+            }
+        });
+        // Активируем слушатель адаптера достижения конца списка
         moviesAdapter.setOnReachEndListener(new MoviesAdapter.OnReachEndListener() {
             @Override
             public void onReachEnd() {
