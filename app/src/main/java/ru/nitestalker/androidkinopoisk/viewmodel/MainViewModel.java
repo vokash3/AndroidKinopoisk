@@ -34,11 +34,15 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void loadMovies() {
+        Log.d(TAG, "loadMovies() page is " + page);
+        Boolean loading = isLoading.getValue();
+        // Прекратить запуск очередной загрузки, если она уже запущена ранее
+        if (loading != null && loading) return;
         Disposable disposable = ApiFactory.apiService.loadMovies(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(disposable1 -> isLoading.setValue(true))
-                .doAfterTerminate(() -> isLoading.setValue(false))
+                .doOnSubscribe(disposable1 -> isLoading.setValue(true)) // isLoading - true при начале
+                .doAfterTerminate(() -> isLoading.setValue(false)) // после завершения isLoading - false
                 .subscribe(movieResponse -> {
                             List<Movie> loadedMovies = movies.getValue();
                             if(loadedMovies != null) {
