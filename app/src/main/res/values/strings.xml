@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">AndroidKinopoisk</string>
     <string name="movie_poster">Постер к фильму</string>
+    <string name="title">Название:</string>
+    <string name="original_title">original_title</string>
+    <string name="label_original_title">Оригинальное название:</string>
+    <string name="rating">0.0</string>
+    <string name="rating_label">Рейтинг:</string>
+    <string name="add_to_fav_desc">Добавить в избранное</string>
+    <string name="label_release_date">Год выхода:</string>
+    <string name="default_release_date">01.01.1970</string>
+    <string name="label_description">Описание:</string>
+    <string name="default_description">Нет описания</string>
 </resources>

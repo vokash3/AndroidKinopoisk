@@ -1,5 +1,6 @@
 package ru.nitestalker.androidkinopoisk;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import ru.nitestalker.androidkinopoisk.activities.MovieDetailsActivity;
 import ru.nitestalker.androidkinopoisk.adapter.MoviesAdapter;
 import ru.nitestalker.androidkinopoisk.model.docs.Movie;
 import ru.nitestalker.androidkinopoisk.viewmodel.MainViewModel;
@@ -64,6 +66,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        // Реакция при нажатии на элемент списка
+        moviesAdapter.setOnMovieClickListener(new MoviesAdapter.OnMovieClickListener() {
+            @Override
+            public void onMovieClick(Movie movie) {
+                Intent movieDetailsActivity = MovieDetailsActivity.newIntent(MainActivity.this, movie);
+                startActivity(movieDetailsActivity);
+            }
+        });
     }
 }

@@ -2,12 +2,14 @@ package ru.nitestalker.androidkinopoisk.model.docs;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Data
-public class Movie {
+public class Movie implements Serializable { // Serializable теперь система может превратить этот класс в поток байт
 
     @SerializedName("id")
     private int id;

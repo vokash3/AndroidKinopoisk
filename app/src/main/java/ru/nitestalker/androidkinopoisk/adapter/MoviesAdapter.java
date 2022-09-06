@@ -29,6 +29,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
     private List<Movie> movieList = new ArrayList<>();
     @Setter
     private OnReachEndListener onReachEndListener;
+    @Setter
+    private OnMovieClickListener onMovieClickListener;
 
     @SuppressLint("NotifyDataSetChanged")
     public void setMovieList(List<Movie> movieList) {
@@ -65,6 +67,14 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
         // Если "рисующийся" элемент находится почти в конце, то вызываем дальнейшую прогрузку элементов
         if(position >= movieList.size() - 10 && onReachEndListener != null)
             onReachEndListener.onReachEnd(); // Логика в MainActivity.onCreate() анонимно
+
+        holder.imageViewPoster.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(onMovieClickListener != null)
+                    onMovieClickListener.onMovieClick(movie);
+            }
+        });
     }
 
     @Override
@@ -85,10 +95,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
     }
 
     public interface OnReachEndListener { // Callback достижения конца списка на экране
-
         void onReachEnd();
-
     }
 
+    public interface OnMovieClickListener {
+        void onMovieClick(Movie movie);
+    }
 
 }
