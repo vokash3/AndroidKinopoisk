@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AndroidKinopoisk</string>
+    <string name="movie_poster">Постер к фильму</string>
 </resources>
