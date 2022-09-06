@@ -1,4 +1,4 @@
-package ru.nitestalker.androidkinopoisk;
+package ru.nitestalker.androidkinopoisk.adapter;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.nitestalker.androidkinopoisk.R;
 import ru.nitestalker.androidkinopoisk.model.docs.Movie;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>{
