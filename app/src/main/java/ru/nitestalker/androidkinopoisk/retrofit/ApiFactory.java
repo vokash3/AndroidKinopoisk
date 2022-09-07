@@ -1,13 +1,13 @@
 package ru.nitestalker.androidkinopoisk.retrofit;
 
-import static ru.nitestalker.androidkinopoisk.utils.UrlHelper.BASE_URL;
-
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class ApiFactory {
+
+    private static final String BASE_URL = "https://api.kinopoisk.dev/";
 
     // Singletone по-хорошему нужен
 
