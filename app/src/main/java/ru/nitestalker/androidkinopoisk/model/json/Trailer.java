@@ -11,4 +11,9 @@ public class Trailer {
     private String name;
     @SerializedName("url")
     private String url;
+
+    public Trailer(String name, String url) {
+        this.name = name;
+        this.url = url;
+    }
 }

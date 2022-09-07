@@ -1,21 +1,27 @@
 package ru.nitestalker.androidkinopoisk.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.bumptech.glide.Glide;
+
+import java.util.List;
 
 import ru.nitestalker.androidkinopoisk.R;
 import ru.nitestalker.androidkinopoisk.model.docs.Movie;
-import ru.nitestalker.androidkinopoisk.viewmodel.MainViewModel;
+import ru.nitestalker.androidkinopoisk.model.json.Trailer;
+import ru.nitestalker.androidkinopoisk.viewmodel.MovieDetailsViewModel;
 
 public class MovieDetailsActivity extends AppCompatActivity {
+    private final String TAG = "MovieDetailsActivity";
 
     private ImageView imageViewBigPoster;
     private TextView textViewTitle;
@@ -23,11 +29,14 @@ public class MovieDetailsActivity extends AppCompatActivity {
     private TextView textViewReleaseDate;
     private TextView textViewDescription;
 
+    private MovieDetailsViewModel viewModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed);
+        viewModel = new ViewModelProvider(this).get(MovieDetailsViewModel.class);
         initViews();
 
         Movie movie = (Movie) getIntent().getSerializableExtra("movie");
@@ -38,6 +47,15 @@ public class MovieDetailsActivity extends AppCompatActivity {
         textViewReleaseDate.setText(String.valueOf(movie.getYear()));
         textViewDescription.setText(movie.getDescription());
         textViewRatingStats.setText(String.valueOf(movie.getRating().getKp()));
+
+        viewModel.loadTrailers(movie.getId()); // Загружаем трейлеры фильма
+        viewModel.getListTrailers().observe(this, new Observer<List<Trailer>>() { // Подписываемся на изменения
+            @Override
+            public void onChanged(List<Trailer> trailers) {
+                Log.d(TAG, trailers.toString()); // TODO Adapter
+            }
+        });
+
     }
 
     private void initViews() {

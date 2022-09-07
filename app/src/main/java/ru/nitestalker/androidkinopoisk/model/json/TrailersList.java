@@ -14,7 +14,6 @@ public class TrailersList {
     @SerializedName("trailers")
     private List<Trailer> trailers;
 
-
     public TrailersList(List<Trailer> trailers) {
         this.trailers = trailers;
     }
