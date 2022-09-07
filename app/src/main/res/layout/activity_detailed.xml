@@ -158,6 +158,7 @@
             app:layout_constraintBottom_toTopOf="@+id/textViewLabelDescription"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewReviews"
             android:layout_width="0dp"

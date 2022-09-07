@@ -11,4 +11,6 @@
     <string name="default_release_date">01.01.1970</string>
     <string name="label_description">Описание:</string>
     <string name="default_description">Нет описания</string>
+    <string name="play_trailer">Воспроизвести</string>
+    <string name="default_trailer">Трейлер</string>
 </resources>

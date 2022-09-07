@@ -2,6 +2,7 @@ package ru.nitestalker.androidkinopoisk.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -10,12 +11,15 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 import ru.nitestalker.androidkinopoisk.R;
+import ru.nitestalker.androidkinopoisk.adapter.TrailersAdapter;
 import ru.nitestalker.androidkinopoisk.model.docs.Movie;
 import ru.nitestalker.androidkinopoisk.model.json.Trailer;
 import ru.nitestalker.androidkinopoisk.viewmodel.MovieDetailsViewModel;
@@ -30,6 +34,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
     private TextView textViewDescription;
 
     private MovieDetailsViewModel viewModel;
+    private TrailersAdapter trailersAdapter;
+    private RecyclerView recyclerViewTrailers;
 
 
     @Override
@@ -38,7 +44,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detailed);
         viewModel = new ViewModelProvider(this).get(MovieDetailsViewModel.class);
         initViews();
-
+        initAdapters();
         Movie movie = (Movie) getIntent().getSerializableExtra("movie");
         Glide.with(this)
                 .load(movie.getPoster().getUrl())
@@ -52,10 +58,23 @@ public class MovieDetailsActivity extends AppCompatActivity {
         viewModel.getListTrailers().observe(this, new Observer<List<Trailer>>() { // Подписываемся на изменения
             @Override
             public void onChanged(List<Trailer> trailers) {
-                Log.d(TAG, trailers.toString()); // TODO Adapter
+                trailersAdapter.setTrailers(trailers);
             }
         });
 
+    }
+
+    private void initAdapters() {
+        trailersAdapter = new TrailersAdapter();
+        recyclerViewTrailers.setAdapter(trailersAdapter);
+        recyclerViewTrailers.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        trailersAdapter.setOnTrailerClickListener(new TrailersAdapter.OnTrailerClickListener() {
+            @Override
+            public void onTrailerClick(String url) {
+                Intent intentToTrailer = new Intent(Intent.ACTION_VIEW, Uri.parse(url)); // Переход на YT для просмотра трейлера
+                startActivity(intentToTrailer);
+            }
+        });
     }
 
     private void initViews() {
@@ -64,6 +83,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         textViewReleaseDate = findViewById(R.id.textViewReleaseDate);
         textViewDescription = findViewById(R.id.textViewOverview);
         textViewRatingStats = findViewById(R.id.textViewRatingStats);
+        recyclerViewTrailers = findViewById(R.id.recyclerViewTrailers);
     }
 
     public static Intent newIntent(Context context, Movie movie) {
