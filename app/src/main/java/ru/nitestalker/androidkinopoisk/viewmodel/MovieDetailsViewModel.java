@@ -16,8 +16,10 @@ import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import lombok.Getter;
+import ru.nitestalker.androidkinopoisk.model.ReviewResponse;
 import ru.nitestalker.androidkinopoisk.model.TrailersResponse;
 import ru.nitestalker.androidkinopoisk.model.json.Trailer;
+import ru.nitestalker.androidkinopoisk.model.reviews.Review;
 import ru.nitestalker.androidkinopoisk.retrofit.ApiFactory;
 
 public class MovieDetailsViewModel extends AndroidViewModel {
@@ -55,6 +57,28 @@ public class MovieDetailsViewModel extends AndroidViewModel {
                 });
         compositeDisposable.add(disposable);
     }
+
+    public void loadReviews(int id) {
+        Disposable disposable = ApiFactory.apiService.loadReviews(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(new Function<ReviewResponse, List<Review>>() { // Преобразуем TrailerResponse в List<Trailer>. Грубо говоря, распаковываем респонс и передаём далее по цепочке список из респонса
+                    @Override
+                    public List<Review> apply(ReviewResponse reviewResponse) throws Throwable {
+                        return reviewResponse.getReviews();
+                    }
+                })
+                .subscribe(new Consumer<List<Review>>() {
+                    @Override
+                    public void accept(List<Review> reviews) throws Throwable {
+                        Log.d(TAG, reviews.toString());
+                    }
+                }, throwable -> {
+                    Log.e(TAG, throwable.toString());
+                });
+        compositeDisposable.add(disposable);
+    }
+
 
     @Override
     protected void onCleared() {

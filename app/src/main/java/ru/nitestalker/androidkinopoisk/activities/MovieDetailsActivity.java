@@ -55,6 +55,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         textViewRatingStats.setText(String.valueOf(movie.getRating().getKp()));
 
         viewModel.loadTrailers(movie.getId()); // Загружаем трейлеры фильма
+        viewModel.loadReviews(movie.getId()); // Загружаем отзывы к фильму
         viewModel.getListTrailers().observe(this, new Observer<List<Trailer>>() { // Подписываемся на изменения
             @Override
             public void onChanged(List<Trailer> trailers) {
@@ -71,7 +72,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         trailersAdapter.setOnTrailerClickListener(new TrailersAdapter.OnTrailerClickListener() {
             @Override
             public void onTrailerClick(String url) {
-                Intent intentToTrailer = new Intent(Intent.ACTION_VIEW, Uri.parse(url)); // Переход на YT для просмотра трейлера
+                Intent intentToTrailer = new Intent(Intent.ACTION_VIEW, Uri.parse(url)); // Переход по url для просмотра трейлера (НЕЯВНЫЙ ИНТЕНТ)
                 startActivity(intentToTrailer);
             }
         });
