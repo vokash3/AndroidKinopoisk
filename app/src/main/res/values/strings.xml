@@ -20,4 +20,5 @@
     <string name="default_count">0</string>
     <string name="like">👍🏻</string>
     <string name="dislike">👎🏻</string>
+    <string name="open_reviews">Отзывы</string>
 </resources>

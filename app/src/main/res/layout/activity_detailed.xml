@@ -124,7 +124,7 @@
             android:text="@string/label_description"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerViewTrailers" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewLabelReleaseDate" />
 
         <TextView
             android:id="@+id/textViewOverview"
@@ -154,18 +154,21 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:nestedScrollingEnabled="false"
-            app:layout_constraintTop_toBottomOf="@+id/textViewReleaseDate"
-            app:layout_constraintBottom_toTopOf="@+id/textViewLabelDescription"
+            tools:listitem="@layout/trailer_item"
+            app:layout_constraintTop_toBottomOf="@+id/textViewOverview"
+            app:layout_constraintBottom_toTopOf="@id/buttonOpenReviews"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewReviews"
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/buttonOpenReviews"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
-            app:layout_constraintTop_toBottomOf="@+id/textViewOverview"
+            android:text="@string/open_reviews"
+            app:layout_constraintTop_toBottomOf="@id/recyclerViewTrailers"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

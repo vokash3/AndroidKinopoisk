@@ -4,7 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,11 +33,12 @@ public class MovieDetailsActivity extends AppCompatActivity {
     private TextView textViewRatingStats;
     private TextView textViewReleaseDate;
     private TextView textViewDescription;
+    private Button buttonOpenReviews;
 
     private MovieDetailsViewModel viewModel;
     private TrailersAdapter trailersAdapter;
     private RecyclerView recyclerViewTrailers;
-    private RecyclerView recyclerViewReviews;
+    private Movie movie;
 
 
     @Override
@@ -46,7 +48,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(MovieDetailsViewModel.class);
         initViews();
         initAdapters();
-        Movie movie = (Movie) getIntent().getSerializableExtra("movie");
+        movie = (Movie) getIntent().getSerializableExtra("movie");
         Glide.with(this)
                 .load(movie.getPoster().getUrl())
                 .into(imageViewBigPoster);
@@ -56,14 +58,12 @@ public class MovieDetailsActivity extends AppCompatActivity {
         textViewRatingStats.setText(String.valueOf(movie.getRating().getKp()));
 
         viewModel.loadTrailers(movie.getId()); // Загружаем трейлеры фильма
-        viewModel.loadReviews(movie.getId()); // Загружаем отзывы к фильму
         viewModel.getListTrailers().observe(this, new Observer<List<Trailer>>() { // Подписываемся на изменения
             @Override
             public void onChanged(List<Trailer> trailers) {
                 trailersAdapter.setTrailers(trailers);
             }
         });
-
     }
 
     private void initAdapters() {
@@ -86,12 +86,27 @@ public class MovieDetailsActivity extends AppCompatActivity {
         textViewDescription = findViewById(R.id.textViewOverview);
         textViewRatingStats = findViewById(R.id.textViewRatingStats);
         recyclerViewTrailers = findViewById(R.id.recyclerViewTrailers);
-        recyclerViewReviews = findViewById(R.id.recyclerViewReviews);
+        recyclerViewTrailers = findViewById(R.id.recyclerViewTrailers);
+        buttonOpenReviews = findViewById(R.id.buttonOpenReviews);
+        buttonOpenReviews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MovieDetailsActivity.this, ReviewsActivity.class);
+                intent.putExtra("movie", movie);
+                startActivity(intent);
+            }
+        });
     }
 
     public static Intent newIntent(Context context, Movie movie) {
         Intent intent = new Intent(context, MovieDetailsActivity.class);
         intent.putExtra("movie", movie); // Для передачи кастомных классов они д.б. Serializable
         return intent;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

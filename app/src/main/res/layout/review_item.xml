@@ -4,29 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/black"
     app:cardCornerRadius="8dp"
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutReview"
         android:layout_width="match_parent"
-        android:layout_height="288dp"
-        android:padding="5dp"
-        android:background="@color/grey">
-
-        <TextView
-            android:id="@+id/textViewCardReviewText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@string/default_review"
-            android:textColor="@color/black"
-            tools:textStyle="italic"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:textAlignment="inherit" />
+        android:layout_height="wrap_content"
+        android:alpha="0.8"
+        android:background="@color/grey"
+        android:padding="5dp">
 
         <TextView
             android:id="@+id/textViewReviewAuthorName"
@@ -34,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="@string/default_author"
-            tools:textStyle="bold"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,25 +41,26 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="@string/default_review_title"
-            tools:textStyle="bold|italic"
-            app:layout_constraintBottom_toTopOf="@+id/textViewCardReviewText"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewReviewAuthorName"
+            android:textStyle="bold|italic" />
+
         <TextView
             android:id="@+id/textViewDislikesLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dislike"
             android:layout_margin="16dp"
+            android:text="@string/dislike"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/textViewLikesCount" />
 
         <TextView
             android:id="@+id/textViewLikesLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/like"
             android:layout_margin="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/textViewDislikesLabel"
+            android:text="@string/like"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -80,20 +69,33 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="@string/default_count"
+            app:layout_constraintBaseline_toBaselineOf="@id/textViewLikesLabel"
             app:layout_constraintStart_toEndOf="@+id/textViewLikesLabel"
-            app:layout_constraintTop_toTopOf="@+id/textViewLikesLabel"
-            app:layout_constraintBaseline_toBaselineOf="@id/textViewLikesLabel"/>
+            app:layout_constraintTop_toTopOf="@+id/textViewLikesLabel" />
 
         <TextView
             android:id="@+id/textViewDislikesCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/default_count"
             android:layout_margin="16dp"
-            app:layout_constraintStart_toEndOf="@+id/textViewDislikesLabel"
-            app:layout_constraintTop_toBottomOf="@id/textViewLikesCount"
-            app:layout_constraintBaseline_toBaselineOf="@id/textViewDislikesLabel" />
+            android:text="@string/default_count"
+            app:layout_constraintBaseline_toBaselineOf="@id/textViewDislikesLabel"
+            app:layout_constraintStart_toEndOf="@+id/textViewDislikesLabel" />
 
+        <TextView
+            android:id="@+id/textViewCardReviewText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/default_review"
+            android:textColor="@color/black"
+            android:textAlignment="inherit"
+            app:layout_constraintBottom_toTopOf="@id/textViewLikesLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewReviewTitle"
+            android:textStyle="italic" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.cardview.widget.CardView>

@@ -16,7 +16,7 @@ public class Review {
     @SerializedName("title")
     String title;
     @SerializedName("type")
-    String type;
+    String type = "";
     @SerializedName("review")
     String review;
     @SerializedName("reviewLikes")

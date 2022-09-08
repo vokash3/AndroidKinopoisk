@@ -2,9 +2,12 @@ package ru.nitestalker.androidkinopoisk;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewMovies;
     private MoviesAdapter moviesAdapter;
     private ProgressBar progressBarLoading;
+    private int backPressedQ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,4 +79,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed()
+    {
+        if (this.backPressedQ == 1)
+        {
+            this.backPressedQ = 0;
+            super.onBackPressed();
+        }
+        else
+        {
+            this.backPressedQ++;
+            Toast.makeText(this, "Нажмите ещё раз, чтобы выйти", Toast.LENGTH_SHORT).show();
+        }
+
+        //Обнуление счётчика через 5 секунд
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                backPressedQ = 0;
+            }
+        }, 5000);
+    }
+
 }
