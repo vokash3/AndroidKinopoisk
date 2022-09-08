@@ -13,4 +13,11 @@
     <string name="default_description">Нет описания</string>
     <string name="play_trailer">Воспроизвести</string>
     <string name="default_trailer">Трейлер</string>
+    <string name="default_review">review</string>
+    <string name="default_date">01.01.1970</string>
+    <string name="default_review_title">default_review_title</string>
+    <string name="default_author">author</string>
+    <string name="default_count">0</string>
+    <string name="like">👍🏻</string>
+    <string name="dislike">👎🏻</string>
 </resources>

@@ -36,6 +36,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     private MovieDetailsViewModel viewModel;
     private TrailersAdapter trailersAdapter;
     private RecyclerView recyclerViewTrailers;
+    private RecyclerView recyclerViewReviews;
 
 
     @Override
@@ -85,6 +86,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         textViewDescription = findViewById(R.id.textViewOverview);
         textViewRatingStats = findViewById(R.id.textViewRatingStats);
         recyclerViewTrailers = findViewById(R.id.recyclerViewTrailers);
+        recyclerViewReviews = findViewById(R.id.recyclerViewReviews);
     }
 
     public static Intent newIntent(Context context, Movie movie) {
