@@ -16,10 +16,8 @@ import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import lombok.Getter;
-import ru.nitestalker.androidkinopoisk.model.ReviewResponse;
 import ru.nitestalker.androidkinopoisk.model.TrailersResponse;
 import ru.nitestalker.androidkinopoisk.model.json.Trailer;
-import ru.nitestalker.androidkinopoisk.model.reviews.Review;
 import ru.nitestalker.androidkinopoisk.retrofit.ApiFactory;
 
 public class MovieDetailsViewModel extends AndroidViewModel {

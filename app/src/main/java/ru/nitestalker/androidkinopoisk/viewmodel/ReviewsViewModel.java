@@ -6,7 +6,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
@@ -43,7 +42,7 @@ public class ReviewsViewModel extends AndroidViewModel {
                 .map(ReviewResponse::getReviews)
                 .subscribe(reviews -> {
                     List<Review> reviewList = listReviews.getValue();
-                    if(reviewList == null) listReviews.setValue(reviews);
+                    if (reviewList == null) listReviews.setValue(reviews);
                     else {
                         reviewList.addAll(reviews);
                         listReviews.setValue(reviewList);

@@ -1,14 +1,14 @@
 package ru.nitestalker.androidkinopoisk.activities;
 
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ProgressBar;
 
 import java.util.List;
 
@@ -16,7 +16,6 @@ import ru.nitestalker.androidkinopoisk.R;
 import ru.nitestalker.androidkinopoisk.adapter.ReviewsAdapter;
 import ru.nitestalker.androidkinopoisk.model.docs.Movie;
 import ru.nitestalker.androidkinopoisk.model.reviews.Review;
-import ru.nitestalker.androidkinopoisk.viewmodel.MovieDetailsViewModel;
 import ru.nitestalker.androidkinopoisk.viewmodel.ReviewsViewModel;
 
 public class ReviewsActivity extends AppCompatActivity {

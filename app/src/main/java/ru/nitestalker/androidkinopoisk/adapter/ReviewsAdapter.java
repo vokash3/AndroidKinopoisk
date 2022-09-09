@@ -35,6 +35,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsV
 
 
     private List<Review> reviews = new ArrayList<>();
+
     @SuppressLint("NotifyDataSetChanged")
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
@@ -67,7 +68,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsV
         } catch (ParseException e) {
             Log.e(TAG, e.getMessage());
         }
-        switch (review.getType()){
+        switch (review.getType()) {
             case TYPE_POSITIVE:
 //                ContextCompat.getColor(holder.itemView.getContext(), R.color.grey);
                 holder.constraintLayoutReview.setBackgroundResource(R.color.green);
@@ -83,7 +84,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsV
                 holder.textViewCardReviewText.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.white));
                 break;
         }
-        if(position >= reviews.size() - 3 && onReachEndListener != null)
+        if (position >= reviews.size() - 3 && onReachEndListener != null)
             onReachEndListener.onReachEnd(); // Логика в MovieDetailsActivity.onCreate() анонимно
     }
 

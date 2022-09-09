@@ -8,7 +8,7 @@ import lombok.Data;
 import ru.nitestalker.androidkinopoisk.model.docs.Movie;
 
 @Data
-public class  MovieResponse {
+public class MovieResponse {
 
     @SerializedName("docs") // Поскольку с сервера прилетает объект docs, а не movies
     private List<Movie> movies;

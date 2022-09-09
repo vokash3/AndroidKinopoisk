@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -81,15 +80,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed()
-    {
-        if (this.backPressedQ == 1)
-        {
+    public void onBackPressed() {
+        if (this.backPressedQ == 1) {
             this.backPressedQ = 0;
             super.onBackPressed();
-        }
-        else
-        {
+        } else {
             this.backPressedQ++;
             Toast.makeText(this, "Нажмите ещё раз, чтобы выйти", Toast.LENGTH_SHORT).show();
         }

@@ -41,7 +41,7 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.Traile
         holder.imageViewTrailerPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(onTrailerClickListener != null)
+                if (onTrailerClickListener != null)
                     onTrailerClickListener.onTrailerClick(trailer.getUrl());
             }
         });
@@ -55,6 +55,7 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.Traile
     public class TrailersViewHolder extends RecyclerView.ViewHolder {
         TextView textViewNameOfTrailer;
         ImageView imageViewTrailerPlay;
+
         public TrailersViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewNameOfTrailer = itemView.findViewById(R.id.textViewCardTrailerNameOfVideo);

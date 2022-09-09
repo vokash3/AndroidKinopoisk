@@ -65,13 +65,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
         holder.textViewRating.setBackground(bg);
 
         // Если "рисующийся" элемент находится почти в конце, то вызываем дальнейшую прогрузку элементов
-        if(position >= movieList.size() - 10 && onReachEndListener != null)
+        if (position >= movieList.size() - 10 && onReachEndListener != null)
             onReachEndListener.onReachEnd(); // Логика в MainActivity.onCreate() анонимно
 
         holder.imageViewPoster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(onMovieClickListener != null)
+                if (onMovieClickListener != null)
                     onMovieClickListener.onMovieClick(movie);
             }
         });

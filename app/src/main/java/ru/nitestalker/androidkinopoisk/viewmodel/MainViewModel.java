@@ -12,8 +12,6 @@ import java.util.List;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.functions.Action;
-import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import lombok.Getter;
 import ru.nitestalker.androidkinopoisk.model.docs.Movie;
@@ -46,7 +44,7 @@ public class MainViewModel extends AndroidViewModel {
                 .doAfterTerminate(() -> isLoading.setValue(false)) // после завершения isLoading - false
                 .subscribe(movieResponse -> {
                             List<Movie> loadedMovies = movies.getValue();
-                            if(loadedMovies != null) {
+                            if (loadedMovies != null) {
                                 loadedMovies.addAll(movieResponse.getMovies());
                                 movies.setValue(loadedMovies);
                             } else movies.setValue(movieResponse.getMovies());
