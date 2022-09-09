@@ -6,6 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import ru.nitestalker.androidkinopoisk.db.dao.MovieDao;
 import ru.nitestalker.androidkinopoisk.model.docs.Movie;
 
 @Database(entities = {Movie.class}, version = 1, exportSchema = false)
@@ -19,4 +20,6 @@ public abstract class MovieDatabase extends RoomDatabase {
             instance = Room.databaseBuilder(application, MovieDatabase.class, DB_NAME).build();
         return instance;
     }
+
+    abstract MovieDao movieDao();
 }
