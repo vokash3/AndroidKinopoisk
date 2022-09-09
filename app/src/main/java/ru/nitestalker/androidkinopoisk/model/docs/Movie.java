@@ -1,5 +1,6 @@
 package ru.nitestalker.androidkinopoisk.model.docs;
 
+import androidx.room.Embedded;
 import androidx.room.Entity;
 
 import com.google.gson.annotations.SerializedName;
@@ -21,8 +22,10 @@ public class Movie implements Serializable { // Serializable теперь сис
     @SerializedName("year")
     private int year;
     @SerializedName("poster")
+    @Embedded
     private Poster poster;
     @SerializedName("rating")
+    @Embedded
     private Rating rating;
 
 }
