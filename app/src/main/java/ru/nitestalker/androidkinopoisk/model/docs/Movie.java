@@ -1,5 +1,7 @@
 package ru.nitestalker.androidkinopoisk.model.docs;
 
+import androidx.room.Entity;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -7,6 +9,7 @@ import java.io.Serializable;
 import lombok.Data;
 
 @Data
+@Entity(tableName = "favourite_movies")
 public class Movie implements Serializable { // Serializable теперь система может превратить этот класс в поток байт
 
     @SerializedName("id")
