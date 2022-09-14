@@ -16,6 +16,9 @@
         android:theme="@style/Theme.AndroidKinopoisk"
         tools:targetApi="31">
         <activity
+            android:name=".FavouritesActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ReviewsActivity"
             android:exported="false" />
         <activity
