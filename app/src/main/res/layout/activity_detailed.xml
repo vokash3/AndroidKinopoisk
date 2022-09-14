@@ -142,6 +142,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:contentDescription="@string/add_to_fav_desc"
+            android:src="@drawable/favourite_add_to"
             app:layout_constraintBottom_toBottomOf="@+id/imageViewBigPoster"
             app:layout_constraintEnd_toEndOf="@+id/imageViewBigPoster"
             app:layout_constraintTop_toBottomOf="@+id/imageViewBigPoster"

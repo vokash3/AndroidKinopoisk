@@ -2,6 +2,7 @@ package ru.nitestalker.androidkinopoisk.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,6 +36,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     private TextView textViewReleaseDate;
     private TextView textViewDescription;
     private Button buttonOpenReviews;
+    private ImageView imageViewStarAdd2Fav;
 
     private MovieDetailsViewModel viewModel;
     private TrailersAdapter trailersAdapter;
@@ -56,12 +59,35 @@ public class MovieDetailsActivity extends AppCompatActivity {
         textViewReleaseDate.setText(String.valueOf(movie.getYear()));
         textViewDescription.setText(movie.getDescription());
         textViewRatingStats.setText(String.valueOf(movie.getRating().getKp()));
-
+        Drawable starOff = ContextCompat.getDrawable(MovieDetailsActivity.this, R.drawable.favourite_add_to);
+        Drawable starOn = ContextCompat.getDrawable(MovieDetailsActivity.this, R.drawable.favourite_remove);
         viewModel.loadTrailers(movie.getId()); // Загружаем трейлеры фильма
         viewModel.getListTrailers().observe(this, new Observer<List<Trailer>>() { // Подписываемся на изменения
             @Override
             public void onChanged(List<Trailer> trailers) {
                 trailersAdapter.setTrailers(trailers);
+            }
+        });
+        viewModel.getFavouriteMovie(movie.getId()).observe(this, new Observer<Movie>() {
+            @Override
+            public void onChanged(Movie movieFromDb) {
+                if (movieFromDb == null) {
+                    imageViewStarAdd2Fav.setImageDrawable(starOff);
+                    imageViewStarAdd2Fav.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            viewModel.insertFavMovie(movie);
+                        }
+                    });
+                } else {
+                    imageViewStarAdd2Fav.setImageDrawable(starOn);
+                    imageViewStarAdd2Fav.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            viewModel.removeFavMovie(movie.getId());
+                        }
+                    });
+                }
             }
         });
     }
@@ -81,6 +107,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
     private void initViews() {
         imageViewBigPoster = findViewById(R.id.imageViewBigPoster);
+        imageViewStarAdd2Fav = findViewById(R.id.imageViewAddToFavourite);
         textViewTitle = findViewById(R.id.textViewTitle);
         textViewReleaseDate = findViewById(R.id.textViewReleaseDate);
         textViewDescription = findViewById(R.id.textViewOverview);

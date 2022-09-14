@@ -12,4 +12,11 @@ public class Rating implements Serializable {
     @SerializedName("kp")
     private Double kp;
 
+    public Double getKp() {
+        return kp;
+    }
+
+    public void setKp(Double kp) {
+        this.kp = kp;
+    }
 }

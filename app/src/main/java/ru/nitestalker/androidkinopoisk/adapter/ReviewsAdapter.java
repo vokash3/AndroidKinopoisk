@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.internal.bind.util.ISO8601Utils;
@@ -72,16 +71,12 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsV
             case TYPE_POSITIVE:
 //                ContextCompat.getColor(holder.itemView.getContext(), R.color.grey);
                 holder.constraintLayoutReview.setBackgroundResource(R.color.green);
-                holder.textViewCardReviewText.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.black));
-
                 break;
             case TYPE_NEGATIVE:
                 holder.constraintLayoutReview.setBackgroundResource(R.color.red);
-                holder.textViewCardReviewText.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.black));
                 break;
             default:
                 holder.constraintLayoutReview.setBackgroundResource(R.color.grey);
-                holder.textViewCardReviewText.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.white));
                 break;
         }
         if (position >= reviews.size() - 3 && onReachEndListener != null)
