@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import ru.nitestalker.androidkinopoisk.activities.FavouritesActivity;
 import ru.nitestalker.androidkinopoisk.activities.MovieDetailsActivity;
 import ru.nitestalker.androidkinopoisk.adapter.MoviesAdapter;
 import ru.nitestalker.androidkinopoisk.model.docs.Movie;
@@ -103,6 +105,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
-        return super.onCreateOptionsMenu(menu);
+//        return super.onCreateOptionsMenu(menu);
+        return true; // Menu будет видно на экране. False - нет
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.menu_item_fav_movies)
+            startActivity(new Intent(FavouritesActivity.newIntent(this)));
+        return super.onOptionsItemSelected(item);
     }
 }

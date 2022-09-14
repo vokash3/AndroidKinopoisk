@@ -16,10 +16,11 @@
         <ImageView
             android:id="@+id/imageViewPoster"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:contentDescription="@string/movie_poster"
             android:minHeight="250dp"
+            android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 

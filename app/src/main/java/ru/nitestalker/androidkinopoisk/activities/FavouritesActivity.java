@@ -3,6 +3,7 @@ package ru.nitestalker.androidkinopoisk.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -27,12 +28,12 @@ public class FavouritesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourites);
+        setTitle(R.string.menu_item_favs);
         viewModel = new ViewModelProvider(this).get(FavouritesViewModel.class);
         recyclerView = findViewById(R.id.recyclerViewFavourites);
         adapter = new MoviesAdapter();
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 3, RecyclerView.VERTICAL, false));
-        viewModel.loadFavMovies(); // Загружаем избранное из внетренней БД
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         viewModel.getFavMovies().observe(this, new Observer<List<Movie>>() {
             @Override
             public void onChanged(List<Movie> movies) {
